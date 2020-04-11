@@ -1,0 +1,39 @@
+/*题目大意
+统计各层叶节点个数，并按高度从上至下打印出来
+*/
+#include<iostream>
+#include<vector>
+using namespace std;
+const int maxn=110;
+vector<int> Tree[maxn];
+int n,m,leaf[maxn],ans=0;
+void DFS(int root,int deepth){
+	if(Tree[root].size()==0){
+		if(ans<deepth)
+			ans=deepth;
+		leaf[deepth]++; 
+		return; 
+	}
+	for(int i=0;i<Tree[root].size();i++)
+		DFS(Tree[root][i],deepth+1);
+}
+int main(){
+	#ifdef ONLINE_JUDGE
+	#else
+		freopen("1.txt","r",stdin);
+	#endif
+	scanf("%d%d",&n,&m);
+	for(int i=0;i<m;i++){
+		int id,k;
+		scanf("%d%d",&id,&k);
+		for(int j=0;j<k;j++){
+			int child;
+			scanf("%d",&child);
+			Tree[id].push_back(child);
+		}
+	}
+	DFS(1,0);
+	for(int i=0;i<=ans;i++)
+		printf("%d%c",leaf[i],i==ans? '\n':' ');
+	return 0;
+}
