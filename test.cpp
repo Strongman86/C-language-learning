@@ -1,5 +1,7 @@
 #include<iostream>
-using namespace std;
+using namespace::std;
 int main(){
-	cout<<"Hello World！！！";
+    
+    cout<<"Hello";
+    system("pause");
 }
